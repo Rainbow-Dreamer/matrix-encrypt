@@ -20,5 +20,6 @@ def decrypt(self):
         text_new.append(odds[j])
     if is_odd:
         text_new.append(evens[ind])
-    self.results = [bytes(text_new)]
-    self.current_msg.configure(text='解密成功，第一个文件是明文')
+    with open(self.filenames[0], 'wb') as f:
+        f.write(bytes(text_new))
+    self.current_msg.configure(text=f'解密成功，已保存在{self.filenames[0]}')

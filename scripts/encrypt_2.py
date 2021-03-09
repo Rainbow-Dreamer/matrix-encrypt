@@ -2,6 +2,8 @@ number_range = 2, 5
 write_style = ['w', 'wb']
 descriptions = '把明文的bytes数组每个8bit整数先进行正或负方向的随机数的移位，然后除以一个随机的整数（从两个整数之间的范围），\
 除数从ASCII码转换成字符作为密文，余数的数组和随机整数的数组作为密钥，速度较快，适合加密比较大的文件'
+
+
 # this is method 2, and this method is prepared for larger data to encrypt.
 # the encrypting matrix in this method will be a string,
 # and we will not calculating the inverse of the encrypting matrix
@@ -9,7 +11,7 @@ descriptions = '把明文的bytes数组每个8bit整数先进行正或负方向�
 def encrypt(self):
     with open(self.choose_filename_path, 'rb') as f:
         text = f.read()
-    
+
     text_length = len(text)
     if encrypt2_mode == 'string':
         text = [i + shift_num for i in text]
@@ -27,5 +29,11 @@ def encrypt(self):
         encrypt_text = [text[i] // encrypt_str for i in range(text_length)]
         mod_str = ''.join(
             [str(text[i] % encrypt_str) for i in range(text_length)])
-    self.results = [str(tuple((encrypt_str, mod_str))), bytes(encrypt_text)] 
-    self.current_msg.configure(text = '加密成功，第一个文件是密钥文件，第二个文件是密文')
+    with open(self.filenames[0], 'w', encoding='utf-8-sig',
+              errors='ignore') as f:
+        f.write(str(tuple((encrypt_str, mod_str))))
+    with open(self.filenames[1], 'wb') as f:
+        f.write(bytes(encrypt_text))
+    self.current_msg.configure(
+        text=f'加密成功，第一个文件是密钥文件，已保存在{self.filenames[0]},' + '\n' +
+        f'第二个文件是密文，已保存在{self.filenames[1]}')

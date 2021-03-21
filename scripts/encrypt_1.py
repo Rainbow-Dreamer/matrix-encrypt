@@ -21,7 +21,12 @@ def encrypt(self):
     while encrypt_mat.det() == 0:
         encrypt_mat.fillin(
             [random.randint(*number_range) for i in range(length)])
-    encrypted_text = encrypt2(text, encrypt_mat, size)
+    while True:
+        try:
+            encrypted_text = encrypt2(text, encrypt_mat, size)
+            break
+        except:
+            continue
     with open(self.filenames[0], 'w', encoding='utf-8-sig',
               errors='ignore') as f:
         f.write(str((encrypt_mat.element(), num, overflow)))

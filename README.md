@@ -8,23 +8,23 @@ The matrix library matrix.py used in this project is also a python library devel
 
 Most of the 9 encryption algorithms I have thought of are applicable to any file on the computer, i.e. there is no limit to the type of file. I will introduce them one by one.
 
-The first encryption algorithm.
+The 1st encryption algorithm:
 
 Encryption: Take the downward rounded square root of the total number of characters of the file to be encrypted as the dimension (number of rows and columns) to generate a square matrix, where each element of the square matrix is a random number picked from the range between two integers. You need to make sure that the determinant of this random number matrix is not zero, i.e., it is guaranteed to be invertible. All the characters of the file to be encrypted are converted to ASCII and then loaded into a square matrix of the same size, then the ASCII matrix of the encrypted file is multiplied by the random number matrix, and the new matrix is translated from ASCII back to characters, and then all the elements of the new matrix are taken out as ciphertext. The random number matrix needs to be saved as a key as well.
 
 Decryption: The ASCII matrix of the ciphertext is multiplied by the inverse of the key matrix to get the ASCII matrix of the plaintext, which is then converted from ASCII to characters to decrypt it into plaintext.
 
-Evaluation: This first algorithm needs to calculate the inverse of the matrix when decrypting, so the amount of operations is very large in the case of relatively large files, and the efficiency will be problematic, so this algorithm is more suitable for encrypting small files, especially for encrypting text files, such as encrypting an article, encrypting links, encrypting some text information, and so on. But the biggest advantage of this algorithm is that the degree of encryption is very high, because each element of the encryption matrix is a random number, and the value of each element will have an impact on the content of the ciphertext (because it is the product of the encryption matrix and the ASCII matrix of the plaintext), so there is no possibility of exhaustive running dictionary brute force cracking, because this is much more than the possibility of a simple one-line password. The disadvantage is that for larger files, the encryption and decryption time takes a long time, so it is suitable for smaller files (about 1MB or less)
+Evaluation: This 1st algorithm needs to calculate the inverse of the matrix when decrypting, so the amount of operations is very large in the case of relatively large files, and the efficiency will be problematic, so this algorithm is more suitable for encrypting small files, especially for encrypting text files, such as encrypting an article, encrypting links, encrypting some text information, and so on. But the biggest advantage of this algorithm is that the degree of encryption is very high, because each element of the encryption matrix is a random number, and the value of each element will have an impact on the content of the ciphertext (because it is the product of the encryption matrix and the ASCII matrix of the plaintext), so there is no possibility of exhaustive running dictionary brute force cracking, because this is much more than the possibility of a simple one-line password. The disadvantage is that for larger files, the encryption and decryption time takes a long time, so it is suitable for smaller files (about 1MB or less)
 
-The 2nd encryption algorithm.
+The 2nd encryption algorithm:
 
 Encryption: Shift each 8bit integer of the plaintext bytes array by a random number in positive or negative direction first, and then divide by a random integer (chosen from the range between two integers), the divisor is converted from ASCII to characters as ciphertext, and the remainder of the array and the array of random integers is used as the key, which is faster and suitable for encrypting larger files.
 
 Decryption: Multiply each 8bit integer of the ciphertext bytes array by the corresponding divisor, add the corresponding remainder, and then shift back to the random number at the time of encryption to get the bytes array of the original text, and write it to the new file in binary form to decrypt it to the original file.
 
-Evaluation: Compared with the first encryption algorithm, this algorithm has nothing to do with matrix, so there is no need to calculate the inverse of the matrix or the product of the matrix, only to shift each byte and divide it with a random integer. The divisor and remainder are taken as the ciphertext and key respectively, which is much faster than the first algorithm, so it is very suitable for encrypting larger files. The disadvantage is that the encryption level is obviously not as high as the matrix encryption of the first encryption algorithm, but in fact, the array of remainders as the key file is also much higher than the encryption level of a one-line cipher.
+Evaluation: Compared with the 1st encryption algorithm, this algorithm has nothing to do with matrix, so there is no need to calculate the inverse of the matrix or the product of the matrix, only to shift each byte and divide it with a random integer. The divisor and remainder are taken as the ciphertext and key respectively, which is much faster than the 1st algorithm, so it is very suitable for encrypting larger files. The disadvantage is that the encryption level is obviously not as high as the matrix encryption of the 1st encryption algorithm, but in fact, the array of remainders as the key file is also much higher than the encryption level of a one-line cipher.
 
-The third encryption algorithm.
+The 3rd encryption algorithm:
 
 Encryption: Read the file in binary form, get the array of its bytes, reverse the order of the array, form the ciphertext, and form the encrypted file in binary form. The speed is the fastest among several algorithms, and it is more suitable for encrypting large files.
 
@@ -32,23 +32,23 @@ Decryption: Read the file in binary form, get the array of bytes, reverse the or
 
 Evaluation: This is a very simple and hardcore encryption algorithm, which does not need any key or any settings, but simply takes the binary bytes array of a file in reverse order as the cipher text, so the speed of encryption and decryption is also huge, so it can be used to encrypt very large files (after my actual test, the speed is also very good when encrypting and decrypting large files), this algorithm This algorithm seems to be very simple, but in fact it is very useful in some emergency situations, and the key is that when others do not know what algorithm you are using to encrypt the file, it is impossible to decrypt the original file anyway, after all, this algorithm does not have a key. In addition, it is obvious that this encryption algorithm is not very suitable for encrypting plain text files, because after encryption, the content of the text is just reversed, which feels like not much encrypted 23333, so this algorithm is suitable for encrypting any type of files other than plain text files.
 
-The fourth type of encryption algorithm.
+The 4th type of encryption algorithm:
 
 Encryption: Take the square root of the bytes array of the file to be encrypted as the downward integer to generate a random permutation matrix, multiply the permutation matrix left by the matrix of the bytes array of the file to be encrypted, and then get the new matrix of the bytes array of the file to be encrypted after a random horizontal exchange, and then get the cipher text, the key is the random permutation matrix.
 
 Decryption: Read the file in binary form, get the array of bytes, multiply the inverse of the key matrix by the matrix of the array of bytes to decrypt the original file.
 
-Evaluation: This algorithm is a faster version of the first algorithm, because the matrix used here is a permutation matrix, and one of the characteristics of a permutation matrix is that its inverse is equal to its transpose, so actually when decrypting we do not need to calculate the inverse of the key matrix, but only the transpose of the key matrix can be used to decrypt. It is much faster to compute the transpose of a large matrix than to compute the inverse of a large matrix. This algorithm is therefore more suitable for encrypting larger files.
+Evaluation: This algorithm is a faster version of the 1st algorithm, because the matrix used here is a permutation matrix, and one of the characteristics of a permutation matrix is that its inverse is equal to its transpose, so actually when decrypting we do not need to calculate the inverse of the key matrix, but only the transpose of the key matrix can be used to decrypt. It is much faster to compute the transpose of a large matrix than to compute the inverse of a large matrix. This algorithm is therefore more suitable for encrypting larger files.
 
-The 5th encryption algorithm.
+The 5th encryption algorithm:
 
-The advantage of using a diagonal matrix is that when decrypting the key matrix, only the transpose of the matrix needs to be calculated (because one of the properties of an orthogonal matrix is that its inverse is equal to its transpose), thus greatly speeding up the decryption process (the arithmetic power required to calculate the inverse of a large matrix is often much larger than the computation of its transpose) is more suitable for encryption and decryption of large files. Another difference from the first encryption algorithm is that the encryption object here is an array of bytes of the file.
+The advantage of using a diagonal matrix is that when decrypting the key matrix, only the transpose of the matrix needs to be calculated (because one of the properties of an orthogonal matrix is that its inverse is equal to its transpose), thus greatly speeding up the decryption process (the arithmetic power required to calculate the inverse of a large matrix is often much larger than the computation of its transpose) is more suitable for encryption and decryption of large files. Another difference from the 1st encryption algorithm is that the encryption object here is an array of bytes of the file.
 
 Decryption: Calculate the inverse of the key matrix (the diagonal matrix belongs to the orthogonal matrix, and its inverse is equal to its transpose), then multiply the matrix of the bytes array of the encrypted file by the inverse of the key matrix to decrypt the original file.
 
 Evaluation: The 5th algorithm is also similar to the 4th algorithm, which is also a fast version of the 1st algorithm. The difference between here and the 4th algorithm is that the diagonal matrix is used to encrypt.
 
-The 6th encryption algorithm.
+The 6th encryption algorithm:
 
 Encryption: Read the file in binary form, get its array of bytes, load the array into a square matrix with the dimension of the number of bytes of the file taking the square root of the downward integer, transpose the matrix, take out all the elements as the array of bytes of the ciphertext, and write it to a new file to get the encrypted file.
 
@@ -56,7 +56,7 @@ Decryption: Read the file in binary form, get its array of bytes, load the array
 
 Evaluation: This is a very fast encryption and decryption algorithm, also very suitable for encrypting larger files, and the encryption degree is good, but it is not suitable for encrypting plain text files, because after encryption is plain text as a transpose of the matrix, still the original content can be seen, so this algorithm is suitable for encrypting all types of files except plain text files.
 
-The seventh encryption algorithm.
+The 7th encryption algorithm:
 
 Encryption: change the byte at a random position in the bytes array of the file to a random byte integer (0-255), and execute the specified number of times to get the encrypted file. The key is the set of meta ancestors of the changed location and the value before the change.
 
@@ -64,7 +64,7 @@ Decryption: Decrypt the file by changing the bytes stored in the key back to the
 
 Evaluation: This is an encryption algorithm that selectively and destructively encrypts the contents of plaintext, the degree of encryption depends on the set number of times to change bytes, the speed of encryption and decryption is relatively fast, and it is also very suitable for encrypting large files.
 
-The eighth encryption algorithm.
+The 8th encryption algorithm:
 
 Encryption: Read the file in binary form, get its array of bytes, line up the odd bits of the array together to form an odd bytes array and the even bits together to form an even bytes array, then connect the odd bytes array to the even bytes array to get the ciphertext.
 
@@ -72,7 +72,7 @@ Decryption: Read the file in binary form, get its array of bytes, divide the arr
 
 Evaluation: This algorithm is to reorder the binary bytes array of a file by the rules of arranging the elements of the array, and the decryption is to apply the reverse rule of this rule to the ciphertext to get the plaintext. The encryption level I think is still very high, and no key is needed, and the speed of encryption and decryption is also very fast, which is very suitable for encrypting large files. In addition, this algorithm is also good for encrypting plain text files, and the original content is almost invisible after encryption.
 
-The 9th encryption algorithm.
+The 9th encryption algorithm:
 
 Encryption: Read the file to be encrypted in binary form and get an array of its bytes. The set password is converted into a list of ASCII codes, and then each byte is shifted in a positive direction from the first to the last cycle. The array of bytes after shifting is converted into characters according to ASCII code to form a cipher text in the format of a text file.
 

@@ -1,6 +1,6 @@
 write_style = ['w', 'w']
-descriptions = 'Take the downward rounded square root of the total number of characters of the file to be encrypted as the dimension (number of rows and columns)\
-Generate a square matrix where each element of the square matrix is a random number picked from the range between two integers. \
+descriptions = 'Take the downward rounded square root of the total number of characters of the file to be encrypted as the dimension (number of rows and columns), \
+generate a square matrix where each element of the square matrix is a random number picked from the range between two integers. \
 It is necessary to ensure that the determinant of this random number matrix is not zero, i.e., it is guaranteed to be invertible. Translate all the characters of the file to be encrypted into \
 ASCII code and then load it into a square matrix of the same size, then multiply the ASCII code matrix of the encrypted file by the random number matrix to get the \
 The new matrix is then translated from ASCII back to characters, and then all elements of the new matrix are taken out as ciphertext. The random number matrix needs to be saved as a key as well.'

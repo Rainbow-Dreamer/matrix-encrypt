@@ -1,5 +1,5 @@
 descriptions = 'Change the byte at a random position in the bytes array of the file to a random byte integer (0-255), \
-Execute the specified number of times to get the encrypted file. （The key is the set of meta ancestors of the changed location and the value before the change.'
+Execute the specified number of times to get the encrypted file. The key is the set of meta ancestors of the changed location and the value before the change.'
 
 write_style = ['w', 'wb']
 # this method is to change bytes to random bytes at random places of the data

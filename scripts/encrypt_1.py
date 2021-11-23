@@ -20,23 +20,22 @@ def encrypt(self):
               encoding=encrypt_file_format,
               errors=errors_settings) as f, open(self.filenames[1],
                                                  'w',
-                                                 encoding='utf-8-sig',
+                                                 encoding='utf-8',
                                                  errors='ignore') as file:
         for i in range(convert_times):
             text = f.read(length)
+            if not text:
+                overflow = length - current_text_length
+                self.current_msg.configure(text='encrypt progress: 100 %')
+                self.current_msg.update()
+                break
+            current_text_length = len(text)
             file.write(encrypt2(text, encrypt_mat, size))
             self.current_msg.configure(
                 text=
                 f'encrypt progress: {round(((i+1)/convert_times)*100, 3)} %')
             self.current_msg.update()
-        text = f.read(length)
-        overflow = length - len(text)
-        text += ' ' * overflow
-        file.write(encrypt2(text, encrypt_mat, size))
-        self.current_msg.configure(text='encrypt progress: 100 %')
-        self.current_msg.update()
-    with open(self.filenames[0], 'w', encoding='utf-8-sig',
-              errors='ignore') as f:
+    with open(self.filenames[0], 'w', encoding='utf-8', errors='ignore') as f:
         f.write(str((encrypt_mat.element(), overflow)))
     self.current_msg.configure(
         text=

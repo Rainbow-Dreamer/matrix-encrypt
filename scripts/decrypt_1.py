@@ -8,7 +8,7 @@ def decrypt(self):
                                                   filetype=(("All files",
                                                              "*.*"), ))
     if mat_decrypt:
-        with open(mat_decrypt, encoding='utf-8-sig') as f:
+        with open(mat_decrypt, encoding='utf-8') as f:
             data = f.read()
         if not (data[0] == '(' and data[-1] == ')'):
             self.current_msg.configure(text='Incorrect key file format')
@@ -23,14 +23,18 @@ def decrypt(self):
                   encoding=decrypt_file_format,
                   errors=errors_settings) as f, open(self.filenames[0],
                                                      'w',
-                                                     encoding='utf-8-sig',
+                                                     encoding='utf-8',
                                                      errors='ignore') as file:
             for i in range(convert_times):
                 text = f.read(length)
-                current = decrypt2(text, mat_decrypt, mat_size)
-                if i == convert_times - 1:
+                if not text:
                     if overflow != 0:
-                        current = current[:-overflow]
+                        file.seek(file.tell() - overflow, os.SEEK_SET)
+                        file.truncate()
+                    self.current_msg.configure(text='decrypt progress: 100 %')
+                    self.current_msg.update()
+                    break
+                current = decrypt2(text, mat_decrypt, mat_size)
                 file.write(current)
                 self.current_msg.configure(
                     text=

@@ -9,7 +9,7 @@ import sys
 
 sys.path.append('scripts')
 from matrixpro.matrix import *
-with open('scripts/encrypt_config.py', encoding='utf-8-sig') as f:
+with open('scripts/encrypt_config.py', encoding='utf-8') as f:
     exec(f.read())
 write_style = []
 
@@ -63,7 +63,7 @@ class Root(Tk):
     def see_descriptions(self):
         current = self.choosebox.index(ACTIVE) + 1
         with open(f'scripts/encrypt_{current}.py',
-                  encoding='utf-8-sig',
+                  encoding='utf-8',
                   errors='ignore') as f:
             exec(f.read(), globals())
         messagebox.showinfo(title=f'encryption algorithm {current}',
@@ -72,7 +72,7 @@ class Root(Tk):
     def see_descriptions2(self):
         current = self.choosebox.index(ACTIVE) + 1
         with open(f'scripts/decrypt_{current}.py',
-                  encoding='utf-8-sig',
+                  encoding='utf-8',
                   errors='ignore') as f:
             exec(f.read(), globals())
         messagebox.showinfo(title=f'decryption algorithm {current}',
@@ -91,7 +91,7 @@ class Root(Tk):
         current = self.choosebox.index(ACTIVE) + 1
         with open(f'scripts/encrypt_{current}.py'
                   if mode == 0 else f'scripts/decrypt_{current}.py',
-                  encoding='utf-8-sig',
+                  encoding='utf-8',
                   errors='ignore') as f:
             exec(f.read(), globals())
         self.filenames = []
@@ -127,7 +127,7 @@ class Root(Tk):
             return
         current = self.choosebox.index(ACTIVE) + 1
         with open(f'scripts/encrypt_{current}.py',
-                  encoding='utf-8-sig',
+                  encoding='utf-8',
                   errors='ignore') as f:
             exec(f.read(), globals())
         encrypt(self)
@@ -146,7 +146,7 @@ class Root(Tk):
             return
         current = self.choosebox.index(ACTIVE) + 1
         with open(f'scripts/decrypt_{current}.py',
-                  encoding='utf-8-sig',
+                  encoding='utf-8',
                   errors='ignore') as f:
             exec(f.read(), globals())
         decrypt(self)

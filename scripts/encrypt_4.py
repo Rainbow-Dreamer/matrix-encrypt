@@ -1,7 +1,7 @@
 write_style = ['w', 'wb']
-descriptions = '以要加密的文件的bytes数组的向下取整平方根为维度生成一个随机的置换矩阵，\
-将置换矩阵左乘以要加密的文件的bytes数组的矩阵，即可得到要加密的文件的bytes数组\
-的矩阵的随机横行交换过后得到的新的数组，即可得到密文，密钥为随机的置换矩阵。'
+descriptions = 'Using the square root of the bytes array of the file to be encrypted as the dimension to generate a random permutation matrix, \
+Multiply the replacement matrix left by the matrix of the bytes array of the file to be encrypted to get the bytes array of the file to be encrypted \
+The new array is obtained by swapping the random horizontal rows of the matrix of the file to be encrypted, and the key is the random permutation matrix.'
 
 
 # this is actually the third method that I came out in this series,
@@ -46,5 +46,7 @@ def encrypt(self):
     with open(self.filenames[1], 'wb') as f:
         f.write(bytes(encrypt_text))
     self.current_msg.configure(
-        text=f'加密成功，第一个文件是密钥文件，已保存在{self.filenames[0]},' + '\n' +
-        f'第二个文件是密文，已保存在{self.filenames[1]}')
+        text=
+        f'Encrypt successful,  the first file is key file, saved at {self.filenames[0]},'
+        + '\n' +
+        f'the second file is ciphertext file, saved at {self.filenames[1]}')

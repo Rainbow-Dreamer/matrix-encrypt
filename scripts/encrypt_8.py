@@ -1,6 +1,6 @@
-descriptions = '以二进制形式读取文件，得到其bytes的数组，将数组的奇数位排在一起\
-形成奇数bytes数列，偶数位排在一起形成偶数bytes数列，然后把奇数bytes数列接上偶数bytes数列，\
-即可得到密文。'
+descriptions = 'Read the file in binary form, get an array of its bytes, line up the odd bits of the array together \
+to form an odd bytes array, and the even bits are lined up to form an even bytes array, and then the odd bytes array is connected to the even bytes array, \
+to get the ciphertext.'
 
 write_style = ['wb']
 
@@ -18,4 +18,7 @@ def encrypt(self):
             ] + [text[i] for i in range(lens) if i % 2 == 0]
     with open(self.filenames[0], 'wb') as f:
         f.write(bytes(text))
-    self.current_msg.configure(text=f'加密成功，第一个文件是密文，已保存在{self.filenames[0]}')
+    self.current_msg.configure(
+        text=
+        f'Encrypt successful,  the first file is ciphertext file, saved at {self.filenames[0]}'
+    )

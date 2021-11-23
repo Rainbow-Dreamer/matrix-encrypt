@@ -1,7 +1,7 @@
 number_range = 2, 5
 write_style = ['w', 'wb']
-descriptions = '把明文的bytes数组每个8bit整数先进行正或负方向的随机数的移位，然后除以一个随机的整数（从两个整数之间的范围），\
-除数从ASCII码转换成字符作为密文，余数的数组和随机整数的数组作为密钥，速度较快，适合加密比较大的文件'
+descriptions = 'Shift each 8bit integer of the bytes array of plaintext by a random number in positive or negative direction first, then divide by a random integer (from the range between two integers), \
+The division is converted from ASCII to characters as ciphertext, and the remainder of the array and the array of random integers is used as the key, which is faster and suitable for encrypting larger files'
 
 
 # this is method 2, and this method is prepared for larger data to encrypt.
@@ -35,5 +35,7 @@ def encrypt(self):
     with open(self.filenames[1], 'wb') as f:
         f.write(bytes(encrypt_text))
     self.current_msg.configure(
-        text=f'加密成功，第一个文件是密钥文件，已保存在{self.filenames[0]},' + '\n' +
-        f'第二个文件是密文，已保存在{self.filenames[1]}')
+        text=
+        f'Encrypt successful,  the first file is key file, saved at {self.filenames[0]},'
+        + '\n' +
+        f'the second file is ciphertext file, saved at {self.filenames[1]}')

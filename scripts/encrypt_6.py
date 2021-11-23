@@ -2,8 +2,8 @@
 # and calculate the transpose of the matrix, and then fill in data bytes
 # of the transposed matrix to the encrypted file.
 # (This method mainly applies for all of the files excepts plain text files)
-descriptions = '以二进制形式读取文件，得到其bytes的数组，将数组装入一个维度为文件的bytes数量的向下取整平方根的方块矩阵，\
-将矩阵进行转置，取出所有元素作为密文的bytes数组，写入新文件即可得到加密的文件。'
+descriptions = 'Read the file in binary form, get an array of its bytes, load the array into a square matrix with the dimension of the number of bytes of the file rounded down to the square root, \
+Transpose the matrix, remove all elements as the array of bytes of the ciphertext, and write to a new file to get the encrypted file.'
 
 write_style = ['wb']
 
@@ -25,4 +25,7 @@ def encrypt(self):
             text_new.append(text[current])
     with open(self.filenames[0], 'wb') as f:
         f.write(bytes(text_new))
-    self.current_msg.configure(text=f'加密成功，第一个文件是密文，已保存在{self.filenames[0]}')
+    self.current_msg.configure(
+        text=
+        f'Encrypt successful,  the first file is ciphertext file, saved at {self.filenames[0]}'
+    )

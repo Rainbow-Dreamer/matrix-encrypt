@@ -1,7 +1,8 @@
-descriptions = '使用正交矩阵来对文件进行加密，在这里为对角矩阵，加密的细节与第一种加密算法类似，\
-使用对角矩阵加密的好处是解密的时候计算密钥矩阵的逆只需要计算矩阵的转置（因为正交矩阵的一个性质就是\
-其逆等于其转置），从而大大加快了解密的速度，（计算一个大型矩阵的逆所费的算力往往要远大于计算其转置）\
-更加适用于大型文件的加密和解密。另外一个与第一种加密算法的区别是这里的加密对象是文件的bytes数组。'
+descriptions = 'Using an orthogonal matrix to encrypt the file, in this case a diagonal matrix, the details of encryption are similar to the first encryption algorithm, \
+The advantage of using diagonal matrix encryption is that when decrypting the key matrix, only the transpose of the matrix needs to be calculated when calculating the \
+inverse of the key matrix (because one of the properties of an orthogonal matrix is that (because one of the properties of an orthogonal matrix is that its inverse is \
+equal to its transpose), thus greatly speeding up the decryption process (the computation of the inverse of a large matrix often requires much more arithmetic power than the computation of its transpose).\
+is more suitable for encryption and decryption of large files. Another difference with the first encryption algorithm is that the encrypted object here is an array of bytes of the file.'
 
 write_style = ['w', 'w']
 number_range = 2, 3
@@ -35,5 +36,7 @@ def encrypt(self):
               errors='ignore') as f:
         f.write(encrypted_text)
     self.current_msg.configure(
-        text=f'加密成功，第一个文件是密钥文件，已保存在{self.filenames[0]},' + '\n' +
-        f'第二个文件是密文，已保存在{self.filenames[1]}')
+        text=
+        f'Encrypt successful,  the first file is key file, saved at {self.filenames[0]},'
+        + '\n' +
+        f'the second file is ciphertext file, saved at {self.filenames[1]}')

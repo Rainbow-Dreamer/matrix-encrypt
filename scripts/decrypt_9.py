@@ -1,12 +1,12 @@
 write_style = ['wb']
-descriptions = '输入的密码转换成ASCII码对密文的字符对应的ASCII码进行从第一个到最后一个的循环的负方向的移位，即可解密为原文件。'
+descriptions = 'The entered password is converted to ASCII code by shifting the ASCII code of the cipher text from the first to the last character in a circular negative direction to decrypt the original file.'
 
 
 def decrypt(self):
-    self.password_enter = ttk.Label(self, text='请输入密码')
+    self.password_enter = ttk.Label(self, text='Please enter password')
     self.password_enter_show = ttk.Entry(self)
     self.current_encrypt_button = ttk.Button(self,
-                                             text='开始解密',
+                                             text='Start decrypting',
                                              command=lambda: decrypt2(self))
     self.password_enter.place(x=200, y=350)
     self.password_enter_show.place(x=200, y=380)
@@ -16,7 +16,7 @@ def decrypt(self):
 def decrypt2(self):
     password = self.password_enter_show.get()
     if not password:
-        self.current_msg.configure(text='请输入密码')
+        self.current_msg.configure(text='Please enter password')
         return
     N = len(password)
     password_list = [ord(i) for i in password]
@@ -33,7 +33,8 @@ def decrypt2(self):
                         for j in range(counter, counter + current_len)
                     ]))
                 counter += current_len
-    self.current_msg.configure(text=f'解密成功，已保存在{self.filenames[0]}')
+    self.current_msg.configure(
+        text=f'Decrypt successfully, saved at {self.filenames[0]}')
     self.password_enter.destroy()
     self.password_enter_show.destroy()
     self.current_encrypt_button.destroy()

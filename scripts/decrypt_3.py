@@ -1,4 +1,4 @@
-descriptions = '以二进制形式读取文件，得到其bytes的数组，将数组倒序，即可解密为原文件。'
+descriptions = 'Read the file in binary form, get the array of its bytes, reverse the array, and decrypt it to the original file.'
 write_style = ['wb']
 
 
@@ -7,4 +7,5 @@ def decrypt(self):
         with open(self.choose_filename_path, 'rb') as f:
             for line in reversed(f.readlines()):
                 file.write(bytes(list(line)[::-1]))
-    self.current_msg.configure(text=f'解密成功，已保存在{self.filenames[0]}')
+    self.current_msg.configure(
+        text=f'Decrypt successfully, saved at {self.filenames[0]}')

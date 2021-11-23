@@ -1,6 +1,6 @@
-descriptions = '以二进制形式读取文件，得到其bytes的数组，将数组按照长度分成两半，\
-形成两个新的bytes数组，两个bytes数组每次各自拿出一个，直到两个bytes数组都遍历完，\
-即可解密为原文件。'
+descriptions = 'Read the file in binary form, get its array of bytes, divide the array into two halves according to its length, \
+to form two new bytes arrays, and the two bytes arrays are taken out one at a time, until both bytes arrays are traversed, \
+can be decrypted to the original file.'
 
 write_style = ['wb']
 
@@ -22,4 +22,5 @@ def decrypt(self):
         text_new.append(evens[ind])
     with open(self.filenames[0], 'wb') as f:
         f.write(bytes(text_new))
-    self.current_msg.configure(text=f'解密成功，已保存在{self.filenames[0]}')
+    self.current_msg.configure(
+        text=f'Decrypt successfully, saved at {self.filenames[0]}')

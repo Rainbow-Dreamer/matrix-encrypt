@@ -1,5 +1,5 @@
-descriptions = '在文件的bytes数组的随机的位置上的byte改变成随机的byte整数(0-255)，\
-执行指定的次数，即可得到加密后的文件。（每次选择的位置会保证跟之前的不重复）密钥为改变的位置和改变之前的值的元祖集合。'
+descriptions = 'Change the byte at a random position in the bytes array of the file to a random byte integer (0-255), \
+Execute the specified number of times to get the encrypted file. （The key is the set of meta ancestors of the changed location and the value before the change.'
 
 write_style = ['w', 'wb']
 # this method is to change bytes to random bytes at random places of the data
@@ -27,5 +27,7 @@ def encrypt(self):
     with open(self.filenames[1], 'wb') as f:
         f.write(bytes(text))
     self.current_msg.configure(
-        text=f'加密成功，第一个文件是密钥文件，已保存在{self.filenames[0]},' + '\n' +
-        f'第二个文件是密文，已保存在{self.filenames[1]}')
+        text=
+        f'Encrypt successful,  the first file is key file, saved at {self.filenames[0]},'
+        + '\n' +
+        f'the second file is ciphertext file, saved at {self.filenames[1]}')

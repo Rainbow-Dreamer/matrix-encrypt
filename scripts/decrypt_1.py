@@ -1,5 +1,5 @@
 write_style = ['w']
-descriptions = '以密文的ASCII码矩阵乘上密钥矩阵的逆即可得到明文的ASCII码矩阵，再从ASCII码转换成字符即可解密为明文。'
+descriptions = 'The ASCII matrix of the ciphertext is multiplied by the inverse of the key matrix to obtain the ASCII matrix of the plaintext, which is then converted from ASCII to characters to decrypt the plaintext.'
 
 
 def decrypt(self):
@@ -8,13 +8,14 @@ def decrypt(self):
               errors=errors_settings) as f:
         text = f.read()
     mat_decrypt = self.filedialog.askopenfilename(initialdir='.',
-                                                  title='选择密钥文件',
-                                                  filetype=(("所有文件", "*.*"), ))
+                                                  title='Choose key file',
+                                                  filetype=(("All files",
+                                                             "*.*"), ))
     if mat_decrypt:
         with open(mat_decrypt, encoding='utf-8-sig') as f:
             data = f.read()
         if not (data[0] == '(' and data[-1] == ')'):
-            self.current_msg.configure(text='密钥文件格式不正确')
+            self.current_msg.configure(text='Incorrect key file format')
             return
         mat_list, mat_size_num, overflow = eval(data)
         mat_size = [mat_size_num, mat_size_num]
@@ -27,7 +28,8 @@ def decrypt(self):
                   encoding='utf-8-sig',
                   errors='ignore') as f:
             f.write(decrypted_text)
-    self.current_msg.configure(text=f'解密成功，已保存在{self.filenames[0]}')
+    self.current_msg.configure(
+        text=f'Decrypt successfully, saved at {self.filenames[0]}')
 
 
 def decrypt2(text, mat, sizes):

@@ -1,5 +1,5 @@
-descriptions = '以二进制形式读取文件，得到其bytes的数组，将数组装入一个维度为文件的bytes数量的向下取整平方根的方块矩阵，\
-将矩阵进行转置，取出所有元素作为新的bytes数组，再减去之前矩阵溢出的位数即可解密为原文件。'
+descriptions = 'Read the file in binary form, get an array of its bytes, fit the array into a square matrix with the dimension of the number of bytes of the file rounded down to the square root, \
+Transpose the matrix, remove all elements as a new bytes array, and subtract the bits overflowed from the previous matrix to decrypt it to the original file.'
 
 write_style = ['wb']
 
@@ -23,4 +23,5 @@ def decrypt(self):
     text_new = text_new[:overflow_ind]
     with open(self.filenames[0], 'wb') as f:
         f.write(bytes(text_new))
-    self.current_msg.configure(text=f'解密成功，已保存在{self.filenames[0]}')
+    self.current_msg.configure(
+        text=f'Decrypt successfully, saved at {self.filenames[0]}')

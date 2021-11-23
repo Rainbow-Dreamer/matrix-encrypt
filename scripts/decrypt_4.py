@@ -1,4 +1,4 @@
-descriptions = '以二进制形式读取文件，得到其bytes的数组，将密钥矩阵的逆乘以bytes的数组的矩阵即可解密为原文件。'
+descriptions = 'Read the file in binary form, get its array of bytes, and decrypt the original file by multiplying the inverse of the key matrix by the matrix of the array of bytes.'
 write_style = ['wb']
 
 
@@ -6,13 +6,14 @@ def decrypt(self):
     with open(self.choose_filename_path, 'rb') as f:
         text = f.read()
     mat_decrypt = self.filedialog.askopenfilename(initialdir='.',
-                                                  title='选择密钥文件',
-                                                  filetype=(("所有文件", "*.*"), ))
+                                                  title='Choose key file',
+                                                  filetype=(("All files",
+                                                             "*.*"), ))
     if mat_decrypt:
         with open(mat_decrypt, encoding='utf-8-sig') as f:
             data = f.read()
         if not (data[0] == '(' and data[-1] == ')'):
-            self.current_msg.configure(text='密钥文件格式不正确')
+            self.current_msg.configure(text='Incorrect key file format')
             return
     perm_num, pre_zeros, num = eval(data)
     text = [i for i in text]
@@ -26,4 +27,5 @@ def decrypt(self):
     decrypt_text = matrix(decrypt_mat.tolist()).element()
     with open(self.filenames[0], 'wb') as f:
         f.write(bytes(decrypt_text))
-    self.current_msg.configure(text=f'解密成功，已保存在{self.filenames[0]}')
+    self.current_msg.configure(
+        text=f'Decrypt successfully, saved at {self.filenames[0]}')

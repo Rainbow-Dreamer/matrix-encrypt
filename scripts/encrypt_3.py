@@ -2,8 +2,8 @@
 # you want to encrypt, it is obviously not a method for plain text encrypting,
 # but for media files (music files, video files, image files and so on)
 # this is very useful and very quick to encrypt and decrypt.
-descriptions = '以二进制形式读取文件，得到其bytes的数组，将数组倒序，形成密文，\
-以二进制的形式形成加密的文件。速度是几种算法里最快的，更加适用于加密大型文件。'
+descriptions = 'Read the file in binary form, get an array of its bytes, reverse the array and form the ciphertext,\
+Form the encrypted file in binary form. The speed is the fastest among several algorithms, and it is more suitable for encrypting large files.'
 
 write_style = ['wb']
 
@@ -13,4 +13,7 @@ def encrypt(self):
         with open(self.choose_filename_path, 'rb') as f:
             for line in reversed(f.readlines()):
                 file.write(bytes(list(line)[::-1]))
-    self.current_msg.configure(text=f'加密成功，第一个文件是密文，已保存在{self.filenames[0]}')
+    self.current_msg.configure(
+        text=
+        f'Encrypt successful,  the first file is ciphertext file, saved at {self.filenames[0]}'
+    )

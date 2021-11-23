@@ -1,4 +1,4 @@
-descriptions = '计算密钥矩阵的逆(对角矩阵属于正交矩阵，其逆等于其转置)，然后用加密的文件的bytes数组的矩阵乘以密钥矩阵的逆，即可解密为原文件'
+descriptions = 'Calculate the inverse of the key matrix (the diagonal matrix is an orthogonal matrix and its inverse is equal to its transpose), then multiply the matrix of the bytes array of the encrypted file by the inverse of the key matrix to decrypt it to the original file'
 write_style = ['wb']
 
 
@@ -8,13 +8,14 @@ def decrypt(self):
               errors=errors_settings) as f:
         text = f.read()
     mat_decrypt = self.filedialog.askopenfilename(initialdir='.',
-                                                  title='选择密钥文件',
-                                                  filetype=(("所有文件", "*.*"), ))
+                                                  title='Choose key file',
+                                                  filetype=(("All files",
+                                                             "*.*"), ))
     if mat_decrypt:
         with open(mat_decrypt, encoding='utf-8-sig') as f:
             data = f.read()
         if not (data[0] == '(' and data[-1] == ')'):
-            self.current_msg.configure(text='密钥文件格式不正确')
+            self.current_msg.configure(text='Incorrect key file format')
             return
     diags, num, overflow = eval(data)
     text = [ord(i) for i in text]
@@ -25,4 +26,5 @@ def decrypt(self):
     decrypted_text = bytes(text[:len(text) - overflow])
     with open(self.filenames[0], 'wb') as f:
         f.write(decrypted_text)
-    self.current_msg.configure(text=f'解密成功，已保存在{self.filenames[0]}')
+    self.current_msg.configure(
+        text=f'Decrypt successfully, saved at {self.filenames[0]}')

@@ -16,6 +16,7 @@ def encrypt(self):
             [random.randint(*number_range) for i in range(length)])
     whole_file_size = os.path.getsize(self.choose_filename_path)
     convert_times, remain_size = divmod(whole_file_size, length)
+    overflow = 0
     with open(self.choose_filename_path,
               encoding=encrypt_file_format,
               errors=errors_settings) as f, open(self.filenames[1],
@@ -24,12 +25,18 @@ def encrypt(self):
                                                  errors='ignore') as file:
         for i in range(convert_times):
             text = f.read(length)
-            if not text:
-                overflow = length - current_text_length
+            text_length = len(text)
+            if text_length < length:
+                if not text_length:
+                    overflow = length - current_text_length
+                else:
+                    overflow = length - text_length
+                    text += ' ' * overflow
+                    file.write(encrypt2(text, encrypt_mat, size))
                 self.current_msg.configure(text='encrypt progress: 100 %')
                 self.current_msg.update()
                 break
-            current_text_length = len(text)
+            current_text_length = text_length
             file.write(encrypt2(text, encrypt_mat, size))
             self.current_msg.configure(
                 text=

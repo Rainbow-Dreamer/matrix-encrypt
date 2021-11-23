@@ -6,6 +6,7 @@ import random, math
 import numpy as np
 import os
 import sys
+import fractions
 
 sys.path.append('scripts')
 from matrixpro.matrix import *

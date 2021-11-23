@@ -8,7 +8,7 @@ import os
 import sys
 
 sys.path.append('scripts')
-from matrixpro import *
+from matrixpro.matrix import *
 with open('scripts/encrypt_config.py', encoding='utf-8-sig') as f:
     exec(f.read())
 write_style = []

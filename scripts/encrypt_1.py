@@ -7,32 +7,37 @@ The new matrix is then translated from ASCII back to characters, and then all el
 
 
 def encrypt(self):
-    with open(self.choose_filename_path,
-              encoding=encrypt_file_format,
-              errors=errors_settings) as f:
-        text = f.read()
-    text_length = len(text)
-    num = math.ceil(text_length**0.5)
-    overflow = num**2 - text_length
-    size = [num, num]
-    length = size[0] * size[1]
+    size = [encrypt1_matrix_size, encrypt1_matrix_size]
+    length = encrypt1_matrix_size**2
     encrypt_mat = build(*size)
     encrypt_mat.fillin([random.randint(*number_range) for i in range(length)])
     while encrypt_mat.det() == 0:
         encrypt_mat.fillin(
             [random.randint(*number_range) for i in range(length)])
-    while True:
-        try:
-            encrypted_text = encrypt2(text, encrypt_mat, size)
-            break
-        except:
-            continue
+    whole_file_size = os.path.getsize(self.choose_filename_path)
+    convert_times, remain_size = divmod(whole_file_size, length)
+    with open(self.choose_filename_path,
+              encoding=encrypt_file_format,
+              errors=errors_settings) as f, open(self.filenames[1],
+                                                 'w',
+                                                 encoding='utf-8-sig',
+                                                 errors='ignore') as file:
+        for i in range(convert_times):
+            text = f.read(length)
+            file.write(encrypt2(text, encrypt_mat, size))
+            self.current_msg.configure(
+                text=
+                f'encrypt progress: {round(((i+1)/convert_times)*100, 3)} %')
+            self.current_msg.update()
+        text = f.read(length)
+        overflow = length - len(text)
+        text += ' ' * overflow
+        file.write(encrypt2(text, encrypt_mat, size))
+        self.current_msg.configure(text='encrypt progress: 100 %')
+        self.current_msg.update()
     with open(self.filenames[0], 'w', encoding='utf-8-sig',
               errors='ignore') as f:
-        f.write(str((encrypt_mat.element(), num, overflow)))
-    with open(self.filenames[1], 'w', encoding='utf-8-sig',
-              errors='ignore') as f:
-        f.write(encrypted_text)
+        f.write(str((encrypt_mat.element(), overflow)))
     self.current_msg.configure(
         text=
         f'Encrypt successful,  the first file is key file, saved at {self.filenames[0]},'

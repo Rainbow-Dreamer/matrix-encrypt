@@ -17,4 +17,4 @@ decrypt2_mode = 'integer'
 
 decrypt7_num = 300
 
-encrypt1_matrix_size = 6
+encrypt1_matrix_size = 10

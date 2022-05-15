@@ -5,8 +5,7 @@ write_style = ['wb']
 def decrypt(self):
     with open(self.choose_filename_path, 'rb') as f:
         text = f.read()
-    mat_decrypt = self.filedialog.askopenfilename(initialdir='.',
-                                                  title='Choose key file',
+    mat_decrypt = self.filedialog.askopenfilename(title='Choose key file',
                                                   filetype=(("All files",
                                                              "*.*"), ))
     if mat_decrypt:

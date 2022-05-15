@@ -3,8 +3,7 @@ descriptions = 'The ASCII matrix of the ciphertext is multiplied by the inverse 
 
 
 def decrypt(self):
-    mat_decrypt = self.filedialog.askopenfilename(initialdir='.',
-                                                  title='Choose key file',
+    mat_decrypt = self.filedialog.askopenfilename(title='Choose key file',
                                                   filetype=(("All files",
                                                              "*.*"), ))
     if mat_decrypt:

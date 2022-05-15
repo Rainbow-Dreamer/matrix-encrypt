@@ -16,6 +16,7 @@ write_style = []
 
 
 class Root(Tk):
+
     def __init__(self):
         super(Root, self).__init__()
         self.minsize(1000, 600)
@@ -80,8 +81,7 @@ class Root(Tk):
                             message=descriptions)
 
     def openfile(self):
-        filename = filedialog.askopenfilename(initialdir='.',
-                                              title="Choose file",
+        filename = filedialog.askopenfilename(title="Choose file",
                                               filetype=(("All files",
                                                          "*.*"), ))
         if filename:
@@ -102,7 +102,6 @@ class Root(Tk):
             current_mode = 0
         for each in range(len(write_style)):
             filename = filedialog.asksaveasfile(
-                initialdir='.',
                 title="Choose the save path of key file"
                 if current_mode == 1 and each == 0 else
                 ("Choose the save path of ciphertext"

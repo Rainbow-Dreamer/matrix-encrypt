@@ -7,8 +7,7 @@ def decrypt(self):
               encoding=decrypt_file_format,
               errors=errors_settings) as f:
         text = f.read()
-    mat_decrypt = self.filedialog.askopenfilename(initialdir='.',
-                                                  title='Choose key file',
+    mat_decrypt = self.filedialog.askopenfilename(title='Choose key file',
                                                   filetype=(("All files",
                                                              "*.*"), ))
     if mat_decrypt:

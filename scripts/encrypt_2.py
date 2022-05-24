@@ -29,8 +29,7 @@ def encrypt(self):
         encrypt_text = [text[i] // encrypt_str for i in range(text_length)]
         mod_str = ''.join(
             [str(text[i] % encrypt_str) for i in range(text_length)])
-    with open(self.filenames[0], 'w', encoding='utf-8-sig',
-              errors='ignore') as f:
+    with open(self.filenames[0], 'w', encoding='utf-8', errors='ignore') as f:
         f.write(str(tuple((encrypt_str, mod_str))))
     with open(self.filenames[1], 'wb') as f:
         f.write(bytes(encrypt_text))

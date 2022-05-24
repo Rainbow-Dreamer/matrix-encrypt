@@ -9,7 +9,7 @@ def decrypt(self):
                                                   filetype=(("All files",
                                                              "*.*"), ))
     if mat_decrypt:
-        with open(mat_decrypt, encoding='utf-8-sig') as f:
+        with open(mat_decrypt, encoding='utf-8') as f:
             data = f.read()
         if not (data[0] == '[' and data[-1] == ']'):
             self.current_msg.configure(text='Incorrect key file format')

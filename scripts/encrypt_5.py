@@ -29,11 +29,9 @@ def encrypt(self):
         for h in range(num * g, num * (g + 1)):
             text[h] *= current
     encrypted_text = ''.join([chr(i) for i in text])
-    with open(self.filenames[0], 'w', encoding='utf-8-sig',
-              errors='ignore') as f:
+    with open(self.filenames[0], 'w', encoding='utf-8', errors='ignore') as f:
         f.write(str((diags, num, overflow)))
-    with open(self.filenames[1], 'w', encoding='utf-8-sig',
-              errors='ignore') as f:
+    with open(self.filenames[1], 'w', encoding='utf-8', errors='ignore') as f:
         f.write(encrypted_text)
     self.current_msg.configure(
         text=

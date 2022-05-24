@@ -21,8 +21,7 @@ def encrypt(self):
         current = places[each]
         places[each] = (current, text[current])
         text[current] = random.randint(0, 255)
-    with open(self.filenames[0], 'w', encoding='utf-8-sig',
-              errors='ignore') as f:
+    with open(self.filenames[0], 'w', encoding='utf-8', errors='ignore') as f:
         f.write(str(places))
     with open(self.filenames[1], 'wb') as f:
         f.write(bytes(text))

@@ -25,7 +25,7 @@ def encrypt2(self):
     N = len(password)
     password_list = [ord(i) for i in password]
     counter = 0
-    with open(self.filenames[0], 'w', encoding='utf-8-sig',
+    with open(self.filenames[0], 'w', encoding='utf-8',
               errors='ignore') as file:
         with open(self.choose_filename_path, 'rb') as f:
             for line in f:

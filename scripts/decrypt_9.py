@@ -22,8 +22,7 @@ def decrypt2(self):
     password_list = [ord(i) for i in password]
     counter = 0
     with open(self.filenames[0], 'wb') as file:
-        with open(self.choose_filename_path,
-                  encoding='utf-8-sig',
+        with open(self.choose_filename_path, encoding='utf-8',
                   errors='ignore') as f:
             for line in f:
                 current_len = len(line)

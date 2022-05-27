@@ -8,8 +8,8 @@ def decrypt(self):
     with open(self.choose_filename_path, 'rb') as f:
         text = f.read()
     mat_decrypt = self.filedialog.askopenfilename(title='Choose key file',
-                                                  filetype=(("All files",
-                                                             "*.*"), ))
+                                                  filetypes=(("All files",
+                                                              "*"), ))
     if mat_decrypt:
         with open(mat_decrypt, encoding='utf-8') as f:
             data = f.read()

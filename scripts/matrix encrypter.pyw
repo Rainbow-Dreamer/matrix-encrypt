@@ -82,8 +82,7 @@ class Root(Tk):
 
     def openfile(self):
         filename = filedialog.askopenfilename(title="Choose file",
-                                              filetype=(("All files",
-                                                         "*.*"), ))
+                                              filetypes=(("All files", "*"), ))
         if filename:
             self.choose_filename_path = filename
             self.choose_filename.configure(text=filename)
@@ -106,7 +105,7 @@ class Root(Tk):
                 if current_mode == 1 and each == 0 else
                 ("Choose the save path of ciphertext"
                  if mode == 0 else "Choose the save path of plaintext"),
-                filetype=(("All files", "*.*"), ))
+                filetypes=(("All files", "*"), ))
             if filename:
                 self.filenames.append(filename.name)
         if len(self.filenames) == len(write_style):
